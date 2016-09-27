@@ -1,0 +1,13 @@
+bin
+gen
+Thumbs.db
+classes
+*.class
+.DS_Store
+~*
+Temp
+temp
+*~
+lint.xml
+*.o
+core
