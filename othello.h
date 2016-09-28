@@ -11,6 +11,10 @@
 #include <iostream>
 using namespace std;
 
+/*! \file
+*		\brief header file for othello.cc
+*/
+
 namespace main_savitch_14
 {
 
@@ -46,5 +50,3 @@ private:
 }
 
 #endif
-
-

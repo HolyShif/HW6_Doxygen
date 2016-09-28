@@ -5,6 +5,10 @@
 
 #include "othello.h"
 
+/*! \file
+*   \brief othello game and decision making functions
+*/
+
 namespace main_savitch_14
 {
 
@@ -189,7 +193,8 @@ void Othello::make_move(const string& move) {
   move_number++;
 }
 
-
+/** This function resets the othello playing board
+*/
 void Othello::restart() {
 
   gameBoard[3][3].set_white();
@@ -379,11 +384,12 @@ bool Othello::is_legal(const string& move)const {
     }
   }
 }
-
+/** This function counts the pieces on the playing board
+*/
 void Othello::countingPieces() {
 
-  int black = 0;
-  int white = 0;
+  int black = 0;  ///< number of black pieces
+  int white = 0;  ///< number of white pieces
 
   for (int b = 0; b < 8; b++) {
     for (int a = 0; a < 8; a++) {

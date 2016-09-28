@@ -1,5 +1,3 @@
-// File: game.cxx
-
 #include <cassert>    // Provides assert
 #include <climits>    // Provides INT_MAX and INT_MIN
 #include <iostream>   // Provides cin, cout
@@ -7,7 +5,12 @@
 #include <string>     // Provides string
 #include "game.h"     // Provides definition of game class
 using namespace std;
-
+/*! \file
+*		\brief general game template
+*
+*		This file acts as a general template to use for several types of
+*		games to include those that utilize computer opponents
+*/
 namespace main_savitch_14
 {
 //*************************************************************************
@@ -17,10 +20,11 @@ namespace main_savitch_14
 //*************************************************************************
 // PUBLIC MEMBER FUNCTIONS
 
+/** The play function should not be overridden. It plays one round of the
+* game, with the human player moving first and the computer second.
+* The return value is the winner of the game (or NEUTRAL for a tie).
+*/
 game::who game::play( )
-// The play function should not be overridden. It plays one round of the
-// game, with the human player moving first and the computer second.
-// The return value is the winner of the game (or NEUTRAL for a tie).
 {
 	restart( );
 
@@ -45,14 +49,18 @@ game::who game::play( )
 //*************************************************************************
 // OPTIONAL VIRTUAL FUNCTIONS (overriding these functions is optional)
 
+/** Displays a message
+*/
 void game::display_message(const string& message) const
 {
 	cout << message;
 }
 
+/** Gets the next user move and returns it
+*/
 string game::get_user_move( ) const
 {
-	string answer;
+	string answer;	//!< User input move
 
 	display_message("If you cannot move, please press 'S'\n");
 	display_message("Your move, please: ");
@@ -60,9 +68,11 @@ string game::get_user_move( ) const
 	return answer;
 }
 
+/** Checks to see the current status of the game, and determines who is winning
+*/
 game::who game::winning()const {
 
-	int value = evaluate();
+	int value = evaluate(); //!< value of winner
 
 	if (value > 0) {
 		return last_mover();
@@ -77,18 +87,19 @@ game::who game::winning()const {
 //*************************************************************************
 // PRIVATE FUNCTIONS (these are the same for every game)
 
+/*! Evaluate a board position with lookahead.
+* --int look_aheads:  How deep the lookahead should go to evaluate the move.
+* --int beat_this: Value of another move that we're considering. If the
+* current board position can't beat this, then cut it short.
+* The return value is large if the position is good for the player who just
+* moved.
+*/
 int game::eval_with_lookahead(int look_ahead, int beat_this)
-// Evaluate a board position with lookahead.
-// --int look_aheads:  How deep the lookahead should go to evaluate the move.
-// --int beat_this: Value of another move that we're considering. If the
-// current board position can't beat this, then cut it short.
-// The return value is large if the position is good for the player who just
-// moved.
 {
-	queue<string> moves;   // All possible opponent moves
-	int value;             // Value of a board position after opponent moves
-	int best_value;        // Evaluation of best opponent move
-	game* future;          // Pointer to a future version of this game
+	queue<string> moves;   //!< All possible opponent moves
+	int value;             //!< Value of a board position after opponent moves
+	int best_value;        //!< Evaluation of best opponent move
+	game* future;          //!< Pointer to a future version of this game
 
 	// Base case:
 	if (look_ahead == 0 || is_game_over( ))
@@ -125,13 +136,17 @@ int game::eval_with_lookahead(int look_ahead, int beat_this)
 	return -best_value;
 }
 
+/** this function makes a computer move based on
+* the best possible move it computes by looking ahead and caluclating
+* possible outcomes.
+*/
 void game::make_computer_move( )
 {
-	queue<string> moves;
-	int value;
-	int best_value;
-	string best_move;
-	game* future;
+	queue<string> moves; //!< queue of possible moves
+	int value;					 //!< value used to determine future moves
+	int best_value;			 //!< best value of the future move
+	string best_move;		 //!< best move in string form
+	game* future;				 //!< pointer to new future game
 
 	// Compute all legal moves that the computer could make.
 	compute_moves(moves);
@@ -158,8 +173,11 @@ void game::make_computer_move( )
 	make_move(best_move);
 }
 
+/** This function gets the next user move, validates its legality,
+* 	and makes the move
+*/
 void game::make_human_move( ) {
-	string move;
+	string move;	//!< move retrieved from user input
 
 	move = get_user_move( );
 	while (!is_legal(move))
@@ -171,6 +189,3 @@ void game::make_human_move( ) {
 }
 
 }
-
-
-

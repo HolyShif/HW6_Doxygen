@@ -6,6 +6,10 @@
 #include <queue>   // Provides queue<string>
 #include <string>  // Provides string
 
+/*! \file
+*		\brief header file for game.cc.
+*/
+
 namespace main_savitch_14
 {
 class game
@@ -85,4 +89,3 @@ private:
 }
 
 #endif
-

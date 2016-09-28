@@ -5,6 +5,10 @@
 
 #ifndef PIECE_H
 #define PIECE_H
+
+/*! \file
+*		\brief defines game pieces for the board
+*/
 enum color {black, white, blank};
 
 class piece {
@@ -33,4 +37,3 @@ private:
 };
 
 #endif
-

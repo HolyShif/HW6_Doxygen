@@ -24,6 +24,9 @@
 //
 //***********************************************************
 
+/*! \file
+*		\brief Contains shell variables to output colors
+*/
 #ifndef COLORS_H
 #define COLORS_H
 
@@ -60,4 +63,3 @@ const string B_CYAN    = "\e[46m";
 const string B_WHITE   = "\e[47m";
 
 #endif //COLORS_H
-
